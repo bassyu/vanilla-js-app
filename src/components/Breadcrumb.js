@@ -1,16 +1,21 @@
 class Breadcrumb {
-  constructor({ parent, initialState }) {
-    this.state = initialState;
-    this.component = document.createElement('div');
+  constructor({ parent }) {
+    this.state = [];
+    this.component = document.createElement('nav');
     this.component.className = 'Breadcrumb';
 
     parent.appendChild(this.component);
   }
 
+  setState(newState) {
+    this.state = newState;
+    this.render();
+  }
+
   render() {
     this.component.innerHTML = `
       <div>root</div>
-      <div>노란고양이</div>
+      ${this.state.map((node, index) => `<div id="${index}">${node}</div>`)}
     `;
   }
 }

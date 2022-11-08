@@ -1,15 +1,31 @@
 import Breadcrumb from './components/Breadcrumb.js';
+import { request } from './lib/api.js';
 
 class App {
-  constructor({ parent, initialState }) {
-    this.state = initialState;
-    this.component = document.createElement('div');
+  constructor({ parent }) {
+    this.state = {
+      isRoot: true,
+      path: [],
+      nodes: [],
+    };
 
-    parent.appendChild(this.component);
+    this.breadcrumb = new Breadcrumb({ parent });
+
+    this.callAPI();
   }
 
-  render() {
-    new Breadcrumb({ parent: this.component }).render();
+  setState(newState) {
+    this.state = newState;
+    this.breadcrumb.setState(newState.path);
+  }
+
+  async callAPI() {
+    const nodes = await request();
+    this.setState({
+      ...this.state,
+      isRoot: true,
+      nodes,
+    });
   }
 }
 
