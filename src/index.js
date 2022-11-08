@@ -1,3 +1,4 @@
 import App from './App.js';
 
-new App({ parent: document.querySelector('.App') }).render();
+const root = document.querySelector('.App');
+new App({ parent: root }).render();
