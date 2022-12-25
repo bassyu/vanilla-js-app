@@ -1,4 +1,5 @@
 import Breadcrumb from './components/Breadcrumb.js';
+import Nodes from './components/Nodes.js';
 import { request } from './lib/api.js';
 
 class App {
@@ -10,13 +11,16 @@ class App {
     };
 
     this.breadcrumb = new Breadcrumb({ parent });
+    this.nodes = new Nodes({ parent });
 
     this.callAPI();
   }
 
   setState(newState) {
     this.state = newState;
-    this.breadcrumb.setState({ path: newState.path });
+    const { isRoot, path, nodes } = newState;
+    this.breadcrumb.setState({ path });
+    this.nodes.setState({ isRoot, nodes });
   }
 
   async callAPI() {
