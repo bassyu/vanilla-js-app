@@ -16,7 +16,7 @@ class App {
 
   setState(newState) {
     this.state = newState;
-    this.breadcrumb.setState(newState.path);
+    this.breadcrumb.setState({ path: newState.path });
   }
 
   async callAPI() {

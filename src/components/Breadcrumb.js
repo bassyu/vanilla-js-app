@@ -1,6 +1,6 @@
 class Breadcrumb {
   constructor({ parent }) {
-    this.state = [];
+    this.state = { path: [] };
     this.component = document.createElement('nav');
     this.component.className = 'Breadcrumb';
 
@@ -15,7 +15,7 @@ class Breadcrumb {
   render() {
     this.component.innerHTML = `
       <div>root</div>
-      ${this.state.map((node, index) => `<div id="${index}">${node}</div>`)}
+      ${this.state.path.map((node, index) => `<div id="${index}">${node}</div>`)}
     `;
   }
 }
