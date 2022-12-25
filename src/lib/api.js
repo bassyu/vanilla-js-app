@@ -1,6 +1,6 @@
 const BASE_URL = 'https://l9817xtkq3.execute-api.ap-northeast-2.amazonaws.com/dev';
 
-export const request = async (id = '') => {
+export const request = async (id) => {
   const fullURL = `${BASE_URL}/${id}`;
 
   try {

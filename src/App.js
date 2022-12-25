@@ -13,7 +13,7 @@ class App {
     this.breadcrumb = new Breadcrumb({ parent });
     this.nodes = new Nodes({ parent });
 
-    this.callAPI();
+    this.callAPI('');
   }
 
   setState(newState) {
@@ -23,8 +23,8 @@ class App {
     this.nodes.setState({ isRoot, nodes });
   }
 
-  async callAPI() {
-    const nodes = await request();
+  async callAPI(id) {
+    const nodes = await request(id);
     this.setState({
       ...this.state,
       isRoot: true,
