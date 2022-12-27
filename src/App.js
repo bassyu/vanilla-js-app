@@ -44,8 +44,22 @@ class App {
 
   async onClickNode(e) {
     const id = e.currentTarget.id;
+    if (id === 'back') {
+      const newState = { ...this.state };
+      newState.path.pop();
+      const prevNodeId =
+        newState.path.length === 0 ? '' : newState.path[newState.path.length - 1].id;
+      this.setState(newState);
+      this.setNodes(prevNodeId);
+      return;
+    }
+
     const clickedNode = this.state.nodes.find((node) => node.id === id);
     if (clickedNode.type === 'DIRECTORY') {
+      this.setState({
+        ...this.state,
+        path: [...this.state.path, clickedNode],
+      });
       this.setNodes(clickedNode.id);
     } else if (clickedNode.type === 'FILE') {
       this.setState({

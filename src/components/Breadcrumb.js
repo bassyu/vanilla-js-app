@@ -18,7 +18,7 @@ class Breadcrumb {
   render() {
     this.component.innerHTML = `
       <div>root</div>
-      ${this.state.path.map((node, index) => `<div id="${index}">${node}</div>`).join('')}
+      ${this.state.path.map((node, index) => `<div id="${index}">${node.name}</div>`).join('')}
     `;
   }
 }
