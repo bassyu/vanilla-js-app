@@ -52,6 +52,10 @@ body {
   padding: 4px;
 }
 
+.Breadcrumb > div:hover {
+  cursor: pointer;
+}
+
 .Breadcrumb > div::after {
   content: ' -';
 }
