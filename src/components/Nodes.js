@@ -15,18 +15,16 @@ class Nodes {
   setState(newState) {
     this.state = newState;
     this.render();
-    console.log(this.state);
   }
 
   render() {
-    console.log('render', this.state);
     this.component.innerHTML = `
-      ${this.state.isRoot ? '' : '<div class="Node"><img src="./assets/prev.png"></div>'}
+      ${this.state.isRoot ? '' : '<div class="Node" id="back"><img src="./assets/prev.png"></div>'}
       ${this.state.nodes
         .map(
           (node) => `
             <div class="Node" id="${node.id}">
-              <img src="${node.type === 'FILE' ? './assets/file.png' : './assets/directory.png'}">
+              <img src="./assets/${node.type === 'FILE' ? 'file.png' : 'directory.png'}">
               <div>${node.name}</div>
             </div>
           `
