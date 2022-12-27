@@ -2,13 +2,14 @@ const IMAGE_PATH_PREFIX =
   'https://fe-dev-matching-2021-03-serverlessdeploymentbuck-1ooef0cg8h3vq.s3.ap-northeast-2.amazonaws.com/public';
 
 class Modal {
-  constructor({ parent }) {
+  constructor({ parent, onClickModal }) {
     this.state = {
-      filePath: 'loading',
+      filePath: null,
     };
 
     this.component = document.createElement('div');
     this.component.className = 'Modal';
+    this.component.addEventListener('click', onClickModal);
     parent.appendChild(this.component);
 
     this.render();
@@ -20,7 +21,6 @@ class Modal {
   }
 
   render() {
-    console.log(this.state);
     this.component.innerHTML = `
       <div class="content">
         <img src="${
@@ -31,7 +31,8 @@ class Modal {
       </div>
     `;
 
-    this.component.style.display = this.state.filePath ? 'block' : 'none';
+    this.component.className = `Modal ${this.state.filePath === 'loading' ? 'Loading' : 'Image'}`;
+    this.component.style.display = this.state.filePath === null ? 'none' : 'block';
   }
 }
 

@@ -14,7 +14,7 @@ class App {
 
     this.breadcrumb = new Breadcrumb({ parent });
     this.nodes = new Nodes({ parent, onClickNode: this.onClickNode.bind(this) });
-    this.modal = new Modal({ parent });
+    this.modal = new Modal({ parent, onClickModal: this.onClickModal.bind(this) });
 
     this.setNodes('');
   }
@@ -67,6 +67,14 @@ class App {
         filePath: clickedNode.filePath,
       });
     }
+  }
+
+  async onClickModal(e) {
+    if (e.currentTarget.className.includes('Loading')) return;
+    this.setState({
+      ...this.state,
+      filePath: null,
+    });
   }
 }
 
