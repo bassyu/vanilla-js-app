@@ -32,8 +32,8 @@ class Nodes {
         .join('')}
     `;
 
-    this.component.querySelectorAll('.Node').forEach((nodeElement) => {
-      nodeElement.addEventListener('click', this.onClickNode);
+    this.component.querySelectorAll('.Node').forEach((node) => {
+      node.addEventListener('click', this.onClickNode);
     });
   }
 }
