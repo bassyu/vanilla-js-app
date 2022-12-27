@@ -33,13 +33,21 @@ class App {
       ...this.state,
       filePath: 'loading',
     });
-    const nodes = await getNodes(id);
-    this.setState({
-      ...this.state,
-      filePath: null,
-      isRoot: id === '',
-      nodes,
-    });
+
+    try {
+      const nodes = await getNodes(id);
+      this.setState({
+        ...this.state,
+        filePath: null,
+        isRoot: id === '',
+        nodes,
+      });
+    } catch (e) {
+      this.setState({
+        ...this.state,
+        filePath: null,
+      });
+    }
   }
 
   async onClickNode(e) {
