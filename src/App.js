@@ -10,6 +10,7 @@ class App {
       path: [],
       nodes: [],
       filePath: null,
+      cache: {},
     };
 
     this.breadcrumb = new Breadcrumb({ parent, onClickPathName: this.onClickPathName.bind(this) });
@@ -25,27 +26,31 @@ class App {
     this.breadcrumb.setState({ path });
     this.nodes.setState({ isRoot, nodes });
     this.modal.setState({ filePath });
-    console.log(this.state);
   }
 
   async setNodes(id) {
+    console.log(this.state);
+
     this.setState({
       ...this.state,
       filePath: 'loading',
     });
 
-    const nodes = await getNodes(id);
+    const nodes = this.state.cache[id] || (await getNodes(id));
     this.setState({
       ...this.state,
       isRoot: id === '',
       nodes,
       filePath: null,
+      cache: {
+        ...this.state.cache,
+        [id]: nodes,
+      },
     });
   }
 
   async onClickPathName(e) {
-    const index = e.currentTarget.id;
-    if (index === 'root') {
+    if (e.currentTarget.id === 'root') {
       this.setState({
         ...this.state,
         path: [],
@@ -54,10 +59,11 @@ class App {
       return;
     }
 
+    const index = Number(e.currentTarget.id);
     const clickedNode = this.state.path[index];
     this.setState({
       ...this.state,
-      path: this.state.path.slice(0, Number(index) + 1),
+      path: this.state.path.slice(0, index + 1),
     });
     this.setNodes(clickedNode.id);
   }
