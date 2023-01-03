@@ -12,7 +12,7 @@ class App {
       filePath: null,
     };
 
-    this.breadcrumb = new Breadcrumb({ parent });
+    this.breadcrumb = new Breadcrumb({ parent, onClickPathName: this.onClickPathName.bind(this) });
     this.nodes = new Nodes({ parent, onClickNode: this.onClickNode.bind(this) });
     this.modal = new Modal({ parent, onClickModal: this.onClickModal.bind(this) });
 
@@ -34,20 +34,32 @@ class App {
       filePath: 'loading',
     });
 
-    try {
-      const nodes = await getNodes(id);
+    const nodes = await getNodes(id);
+    this.setState({
+      ...this.state,
+      isRoot: id === '',
+      nodes,
+      filePath: null,
+    });
+  }
+
+  async onClickPathName(e) {
+    const index = e.currentTarget.id;
+    if (index === 'root') {
       this.setState({
         ...this.state,
-        filePath: null,
-        isRoot: id === '',
-        nodes,
+        path: [],
       });
-    } catch (e) {
-      this.setState({
-        ...this.state,
-        filePath: null,
-      });
+      this.setNodes('');
+      return;
     }
+
+    const clickedNode = this.state.path[index];
+    this.setState({
+      ...this.state,
+      path: this.state.path.slice(0, Number(index) + 1),
+    });
+    this.setNodes(clickedNode.id);
   }
 
   async onClickNode(e) {
