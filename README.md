@@ -4,4 +4,4 @@
 
 ## 📷 Screenshot
 
-![고양이사진첩](https://user-images.githubusercontent.com/54442420/210304208-8cfde65e-d33b-4328-9483-8bb27c8bc295.gif)
+![고양이사진첩-640](https://user-images.githubusercontent.com/54442420/210307973-0373162c-c52f-4003-be12-cd9a00aca757.gif)
