@@ -12,6 +12,6 @@ export const getNodes = async (id) => {
       throw new Error();
     }
   } catch (e) {
-    console.log(e);
+    return getNodes(id);
   }
 };
