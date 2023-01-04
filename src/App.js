@@ -29,8 +29,6 @@ class App {
   }
 
   async setNodes(id) {
-    console.log(this.state);
-
     this.setState({
       ...this.state,
       filePath: 'loading',
